@@ -14,3 +14,6 @@ coverage.txt
 dist/
 *.private
 *.public.txt
+*.crt
+*.crl
+*.pem

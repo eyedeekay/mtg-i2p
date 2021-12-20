@@ -12,12 +12,12 @@ COMMON_BUILD_FLAGS := -trimpath -mod=readonly -ldflags="-extldflags '-static' -s
 GOBIN  := $(ROOT_DIR)/.bin
 GOTOOL := env "GOBIN=$(GOBIN)" "PATH=$(ROOT_DIR)/.bin:$(PATH)"
 
-include plugin.mk
-
 # -----------------------------------------------------------------------------
 
 .PHONY: all
 all: build-local
+
+include plugin.mk
 
 .PHONY: build-local
 build-local:
