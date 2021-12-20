@@ -1,5 +1,5 @@
 ROOT_DIR     := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-IMAGE_NAME   := mtg
+IMAGE_NAME   := mtg-i2p
 APP_NAME     := $(IMAGE_NAME)
 
 GOLANGCI_LINT_VERSION := v1.43.0
@@ -12,6 +12,8 @@ COMMON_BUILD_FLAGS := -trimpath -mod=readonly -ldflags="-extldflags '-static' -s
 GOBIN  := $(ROOT_DIR)/.bin
 GOTOOL := env "GOBIN=$(GOBIN)" "PATH=$(ROOT_DIR)/.bin:$(PATH)"
 
+include plugin.mk
+
 # -----------------------------------------------------------------------------
 
 .PHONY: all
@@ -19,7 +21,7 @@ all: build
 
 .PHONY: build
 build:
-	@go build $(COMMON_BUILD_FLAGS) -o "$(APP_NAME)"
+	@go build $(COMMON_BUILD_FLAGS) -o "$(APP_NAME)-$(GOOS)-$(GOARCH)" main.go
 
 $(APP_NAME): build
 
@@ -50,7 +52,7 @@ citest:
 	@go test -coverprofile=coverage.txt -covermode=atomic -parallel 2 -race -v ./...
 
 .PHONY: clean
-clean:
+clean: clean-plugin
 	@git clean -xfd && \
 		git reset --hard >/dev/null && \
 		git submodule foreach --recursive sh -c 'git clean -xfd && git reset --hard' >/dev/null
@@ -96,3 +98,4 @@ install-tools-goreleaser: .bin
 .PHONY: update-deps
 update-deps:
 	@go get -u && go mod tidy -go=1.17
+
