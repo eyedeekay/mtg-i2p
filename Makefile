@@ -17,7 +17,11 @@ include plugin.mk
 # -----------------------------------------------------------------------------
 
 .PHONY: all
-all: build
+all: build-local
+
+.PHONY: build-local
+build-local:
+	@go build $(COMMON_BUILD_FLAGS) -o "$(APP_NAME)" main.go
 
 .PHONY: build
 build:
