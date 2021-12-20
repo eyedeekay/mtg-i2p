@@ -1,0 +1,16 @@
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+mtg
+mtg-i2p
+vendor/
+ccbuilds/
+.bin/
+coverage.txt
+dist/
+*.private
+*.public.txt
