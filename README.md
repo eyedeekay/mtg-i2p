@@ -16,17 +16,15 @@ to make it easy to keep our distribution up-to-date.
 Plugin install URL's
 --------------------
 
-- [http://idk.i2p/mtg-i2p/]
-
-- [http://idk.i2p/mtg-i2p/mtg-i2p-darwin-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-darwin-amd64.su3)
-- [http://idk.i2p/mtg-i2p/mtg-i2p-darwin-arm64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-darwin-arm64.su3)
-- [http://idk.i2p/mtg-i2p/mtg-i2p-freebsd-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-freebsd-amd64.su3)
-- [http://idk.i2p/mtg-i2p/mtg-i2p-linux-386.su3](http://idk.i2p/mtg-i2p/mtg-i2p-linux-386.su3)
-- [http://idk.i2p/mtg-i2p/mtg-i2p-linux-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-linux-amd64.su3)
-- [http://idk.i2p/mtg-i2p/mtg-i2p-linux-arm64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-linux-arm64.su3)
-- [http://idk.i2p/mtg-i2p/mtg-i2p-openbsd-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-openbsd-amd64.su3)
-- [http://idk.i2p/mtg-i2p/mtg-i2p-windows-386.su3](http://idk.i2p/mtg-i2p/mtg-i2p-windows-386.su3)
-- [http://idk.i2p/mtg-i2p/mtg-i2p-windows-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-windows-amd64.su3)
+- **Mac OSX** - [http://idk.i2p/mtg-i2p/mtg-i2p-darwin-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-darwin-amd64.su3)
+- **Mac OSX ARM** - [http://idk.i2p/mtg-i2p/mtg-i2p-darwin-arm64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-darwin-arm64.su3)
+- **FreeBSD AMD64** - [http://idk.i2p/mtg-i2p/mtg-i2p-freebsd-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-freebsd-amd64.su3)
+- **Linux x86** -[http://idk.i2p/mtg-i2p/mtg-i2p-linux-386.su3](http://idk.i2p/mtg-i2p/mtg-i2p-linux-386.su3)
+- **Linux AMD64** - [http://idk.i2p/mtg-i2p/mtg-i2p-linux-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-linux-amd64.su3)
+- **Linux ARM64** - [http://idk.i2p/mtg-i2p/mtg-i2p-linux-arm64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-linux-arm64.su3)
+- **OpenBSD AMD64** - [http://idk.i2p/mtg-i2p/mtg-i2p-openbsd-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-openbsd-amd64.su3)
+- **Windows x86** - [http://idk.i2p/mtg-i2p/mtg-i2p-windows-386.su3](http://idk.i2p/mtg-i2p/mtg-i2p-windows-386.su3)
+- **Windows AMD64** - [http://idk.i2p/mtg-i2p/mtg-i2p-windows-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-windows-amd64.su3)
 
 Once you install the plugin, your MTProto proxy's base32 address is visible in the file:
 `$PLUGIN/telegram.i2p.i2p.public.txt`. You can connect to it by creating an I2P tunnel and
