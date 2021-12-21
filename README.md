@@ -29,4 +29,5 @@ Plugin install URL's
 - [http://idk.i2p/mtg-i2p/mtg-i2p-windows-amd64.su3](http://idk.i2p/mtg-i2p/mtg-i2p-windows-amd64.su3)
 
 Once you install the plugin, your MTProto proxy's base32 address is visible in the file:
-`$PLUGIN/telegram.i2p.i2p.public.txt`.
+`$PLUGIN/telegram.i2p.i2p.public.txt`. You can connect to it by creating an I2P tunnel and
+configuring it as your MTProto proxy.
