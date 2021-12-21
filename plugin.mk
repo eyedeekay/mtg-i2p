@@ -100,7 +100,7 @@ download-su3s:
 download-single-su3:
 	wget -N -c "https://github.com/$(USER_GH)/$(BINARY)/releases/download/$(VERSION)/$(BINARY)-$(GOOS)-$(GOARCH).su3"
 
-release: clean all version upload-all
+release: all version upload-all
 
 index:
 	@echo "<!DOCTYPE html>" > index.html
