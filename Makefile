@@ -65,12 +65,6 @@ clean: clean-plugin
 lint:
 	@$(GOTOOL) golangci-lint run
 
-.PHONY: release
-release:
-	@$(GOTOOL) goreleaser release --snapshot --rm-dist && \
-		find "$(ROOT_DIR)/dist" -type d | grep -vP "dist$$" | xargs -r rm -rf && \
-		rm -f "$(ROOT_DIR)/dist/config.yaml"
-
 .PHONY: docker
 docker:
 	@docker build --pull -t "$(IMAGE_NAME)" "$(ROOT_DIR)"
