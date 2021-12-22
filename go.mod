@@ -7,6 +7,7 @@ require (
 	github.com/alecthomas/kong v0.2.22
 	github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137
 	github.com/eyedeekay/sam3 v0.32.32
+	github.com/panjf2000/ants/v2 v2.4.7
 	github.com/pelletier/go-toml v1.9.4
 	github.com/rs/zerolog v1.26.1
 	github.com/stretchr/testify v1.7.0
@@ -22,7 +23,6 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/kentik/patricia v0.0.0-20210909164817-21603333b70e // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
-	github.com/panjf2000/ants/v2 v2.4.7 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
@@ -39,3 +39,5 @@ require (
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
+
+replace github.com/9seconds/mtg/v2/mtglib => ./mtglib/

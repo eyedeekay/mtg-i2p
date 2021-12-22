@@ -1,15 +1,24 @@
 package mtglib
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"net"
+	"sync"
 
-	mtglib2 "github.com/9seconds/mtg/v2/mtglib"
+	m "github.com/9seconds/mtg/v2/mtglib"
 	"github.com/panjf2000/ants/v2"
 )
 
-type Proxy mtglib2.Proxy
+type Proxy struct {
+	m.Proxy
+	streamWaitGroup sync.WaitGroup
+	logger          m.Logger
+	workerPool      *ants.PoolWithFunc
+	ctx             context.Context
+	eventStream     m.EventStream
+}
 
 // Serve starts a proxy on a given listener.
 func (p *Proxy) Serve(listener net.Listener) error { // nolint: cyclop
@@ -27,24 +36,24 @@ func (p *Proxy) Serve(listener net.Listener) error { // nolint: cyclop
 			}
 		}
 
-		ipAddr := conn.RemoteAddr().(*net.TCPAddr).IP
+		ipAddr := conn.RemoteAddr()
 		logger := p.logger.BindStr("ip", ipAddr.String())
 
-		if p.whitelist != nil && !p.whitelist.Contains(ipAddr) {
+		/*if p.whitelist != nil && !p.whitelist.Contains(ipAddr) {
 			conn.Close()
 			logger.Info("ip was rejected by whitelist")
-			p.eventStream.Send(p.ctx, NewEventIPBlocklisted(ipAddr))
+			p.eventStream.Send(p.ctx, m.NewEventIPBlocklisted(ipAddr))
 
 			continue
-		}
+		}*/
 
-		if p.blocklist.Contains(ipAddr) {
+		/*if p.blocklist.Contains(ipAddr) {
 			conn.Close()
 			logger.Info("ip was blacklisted")
-			p.eventStream.Send(p.ctx, NewEventIPBlocklisted(ipAddr))
+			p.eventStream.Send(p.ctx, m.NewEventIPBlocklisted(ipAddr))
 
 			continue
-		}
+		}*/
 
 		err = p.workerPool.Invoke(conn)
 
@@ -54,7 +63,7 @@ func (p *Proxy) Serve(listener net.Listener) error { // nolint: cyclop
 			return nil
 		case errors.Is(err, ants.ErrPoolOverload):
 			logger.Info("connection was concurrency limited")
-			p.eventStream.Send(p.ctx, NewEventConcurrencyLimited())
+			p.eventStream.Send(p.ctx, m.NewEventConcurrencyLimited())
 		}
 	}
 }
