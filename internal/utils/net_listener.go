@@ -5,7 +5,6 @@ import (
 	"net"
 	"strings"
 
-	"github.com/9seconds/mtg/v2/network"
 	sam "github.com/eyedeekay/sam3/helper"
 )
 
@@ -17,12 +16,6 @@ func (l Listener) Accept() (net.Conn, error) {
 	conn, err := l.Listener.Accept()
 	if err != nil {
 		return nil, err // nolint: wrapcheck
-	}
-
-	if err := network.SetClientSocketOptions(conn, 0); err != nil {
-		conn.Close()
-
-		return nil, fmt.Errorf("cannot set TCP options: %w", err)
 	}
 
 	return conn, nil
