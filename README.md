@@ -1,5 +1,7 @@
 # mtg-i2p
 
+Current version has known bugs. Testers/developers only.
+
 I2P Service modification of the highly opinionated mtg Telegram proxy.
 [Telegram](https://telegram.org/). This repository contains mostly code which
 is copied from the original mtg source code, specifically, the `internal/cli`,
