@@ -10,11 +10,15 @@ import (
 	"github.com/9seconds/mtg/v2/events"
 	"github.com/9seconds/mtg/v2/ipblocklist"
 	"github.com/9seconds/mtg/v2/logger"
+
 	"github.com/9seconds/mtg/v2/mtglib"
+
+	//"github.com/9seconds/mtg/v2/mtglib"
 	"github.com/9seconds/mtg/v2/network"
 	"github.com/9seconds/mtg/v2/stats"
 	"github.com/eyedeekay/mtg-i2p/internal/config"
 	"github.com/eyedeekay/mtg-i2p/internal/utils"
+	mtglib2 "github.com/eyedeekay/mtg-i2p/mtglib"
 	"github.com/rs/zerolog"
 )
 
@@ -198,8 +202,9 @@ func runProxy(conf *config.Config, version string) error { // nolint: funlen
 		AllowFallbackOnUnknownDC: conf.AllowFallbackOnUnknownDC.Get(false),
 		TolerateTimeSkewness:     conf.TolerateTimeSkewness.Value,
 	}
+	opts2 := mtglib2.ProxyOpts(opts)
 
-	proxy, err := mtglib.NewProxy(opts)
+	proxy, err := mtglib2.NewProxy(opts2)
 	if err != nil {
 		return fmt.Errorf("cannot create a proxy: %w", err)
 	}

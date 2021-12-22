@@ -40,4 +40,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
 
-replace github.com/9seconds/mtg/v2/mtglib => ./mtglib/
+replace github.com/9seconds/mtg/v2@v2.1.4/mtglib => ./mtglib
+replace github.com/9seconds/mtg/v2/mtglib => ./mtglib

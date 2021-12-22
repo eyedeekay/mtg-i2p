@@ -7,6 +7,8 @@ import (
 	"net"
 	"sync"
 
+	"github.com/9seconds/mtg/v2/essentials"
+	"github.com/9seconds/mtg/v2/mtglib"
 	m "github.com/9seconds/mtg/v2/mtglib"
 	"github.com/panjf2000/ants/v2"
 )
@@ -18,6 +20,20 @@ type Proxy struct {
 	workerPool      *ants.PoolWithFunc
 	ctx             context.Context
 	eventStream     m.EventStream
+}
+
+type ProxyOpts m.ProxyOpts
+
+func (p ProxyOpts) getConcurrency() int {
+	if p.Concurrency == 0 {
+		return m.DefaultConcurrency
+	}
+
+	return int(p.Concurrency)
+}
+
+func (p ProxyOpts) getLogger(name string) m.Logger {
+	return p.Logger.Named(name)
 }
 
 // Serve starts a proxy on a given listener.
@@ -66,4 +82,33 @@ func (p *Proxy) Serve(listener net.Listener) error { // nolint: cyclop
 			p.eventStream.Send(p.ctx, m.NewEventConcurrencyLimited())
 		}
 	}
+}
+
+// NewProxy makes a new proxy instance.
+func NewProxy(opts ProxyOpts) (*Proxy, error) {
+	mp, err := m.NewProxy(mtglib.ProxyOpts(opts))
+	if err != nil {
+		return nil, err
+	}
+	p := &Proxy{
+		Proxy:  *mp,
+		logger: opts.getLogger("proxy"),
+		//logger: opts.Logger,
+		/*workerPool:      opts.WorkerPool,
+		ctx:             opts.Ctx,*/
+		eventStream:     opts.EventStream,
+		streamWaitGroup: sync.WaitGroup{},
+	}
+	pool, err := ants.NewPoolWithFunc(opts.getConcurrency(),
+		func(arg interface{}) {
+			p.ServeConn(arg.(essentials.Conn))
+		},
+		ants.WithLogger(opts.getLogger("ants")),
+		ants.WithNonblocking(true))
+	if err != nil {
+		panic(err)
+	}
+
+	p.workerPool = pool
+	return p, nil
 }
